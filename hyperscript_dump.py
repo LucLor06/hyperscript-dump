@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 
 def _snake_case_to_camel_case(data: str) -> str:
     words = data.split('_')

@@ -1,6 +1,6 @@
 [project]
 name = "hyperscript-dump"
-version = "1.0.2"
+version = "1.0.3"
 description = "Convert Python data structures into Hyperscript-compatible code blocks."
 readme = "README.md"
 requires-python = ">=3.7"

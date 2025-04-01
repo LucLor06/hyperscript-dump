@@ -48,6 +48,13 @@ Keeps the element the Hyperscript is on in the DOM after initializing if `True`.
 
 "Camelizes" dictionary keys from snake case (snake_case) to camel case (camelCase) to fit JavaScript naming conventions.
 
+### `flatten`
+*Type*: `bool` | *Default*: `False`
+
+Each key value pair in a dictionary is assigned as a separate variable, rather than as a single object.
+
+**Note:** Requires data to be a dictionary.
+
 ### `scope`
 *Type*: `str` | *Default*: `global`
 
