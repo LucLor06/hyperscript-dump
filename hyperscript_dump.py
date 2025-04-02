@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-__version__ = '1.0.3'
+__version__ = '1.0.4'
 
 def _snake_case_to_camel_case(data: str) -> str:
     words = data.split('_')
@@ -31,7 +31,7 @@ def build_hyperscript(
     camelize: bool = True,
     scope: str = 'global',
     debug: bool = False,
-    event: str = 'init'
+    event: str | None = 'init'
 ) -> str:
     """
     Generate a Hyperscript block from Python data.
@@ -49,8 +49,6 @@ def build_hyperscript(
     Returns:
         A string of valid Hyperscript code.
     """
-    event = f'on {event}' if event not in ['init', None] else 'init'
-
     if camelize:
         data = _camelize(data)
 
@@ -76,6 +74,11 @@ def build_hyperscript(
         if debug:
             logging_statement = f'call console.log(`{name}:\\n`, {name})'
             assignment = f'{assignment} then {logging_statement}'
+
+    if not event:
+        return assignment
+    
+    event = f'on {event}' if event != 'init' else 'init'
 
     hyperscript = f'{event}\n    {assignment}'
 

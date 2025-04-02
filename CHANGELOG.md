@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4] - 2025-04-01
+### Changed
+- `build_hyperscript` will now only return the assignment statements if the `event` kwarg is set to `None`
+
+---
+
+
 ## [1.0.3] - 2025-04-01
 ### Added
 - Added flatten kwarg description to [CHANGELOG.md](CHANGELOG.md)

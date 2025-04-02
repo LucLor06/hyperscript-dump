@@ -1,6 +1,6 @@
 # Hyperscript Dump
 
-Hyperscript dump is a simple python library for turning python data into raw hyperscript.
+Hyperscript dump is a simple python library for turning python data into raw [_hyperscript](https://github.com/bigskysoftware/_hyperscript).
 
 ---
 ## Installation
@@ -18,7 +18,7 @@ from hyperscript_dump import build_hyperscript
 ---
 ## Usage
 
-`build_hyperscript` turns python data into raw Hyperscript.
+`build_hyperscript` turns python data into raw hyperscript.
 
 ```python
 build_hyperscript(data, name='myData')
@@ -41,7 +41,7 @@ end
 ### `preserve`
 *Type*: `bool` | *Default*: `False`
 
-Keeps the element the Hyperscript is on in the DOM after initializing if `True`.
+Keeps the element the hyperscript is on in the DOM after initializing if `True`.
 
 ### `camelize`
 *Type*: `bool` | *Default*: `True`
@@ -58,12 +58,12 @@ Each key value pair in a dictionary is assigned as a separate variable, rather t
 ### `scope`
 *Type*: `str` | *Default*: `global`
 
-Determines the scope of the Hyperscript variable (global, element, or local).
+Determines the scope of the hyperscript variable (global, element, or local).
 
 ### `event`
-*Type*: `str` | *Default*: `init`
+*Type*: `str, None` | *Default*: `init`
 
-Specifies the event that triggers assignment. The Hyperscript "on" keyword should not need be provided.
+Specifies the event that triggers assignment. The hyperscript "on" keyword should not need be provided. When set to none only the hyperscript assignment statements will be returned.
 
 **Note:** If **`preserve`** is `False` (which it is by default), the element will not be removed until after the event is fired and values are set.
 
@@ -81,9 +81,9 @@ assuming `data` is `{"my_value": 25}`, the tag would output
 "init set element my_data to {'my_value': 25} end"
 ```
 In this example:
-- The Hyperscript remains in the DOM since **`preserve`** is `True`
+- The hyperscript remains in the DOM since **`preserve`** is `True`
 - The keys within the dumped data remain in snake case since **`camelize`** is `False`
-- The variable is scoped to the element the Hyperscript belongs to since **`scope`** is set to `'element'`
+- The variable is scoped to the element the hyperscript belongs to since **`scope`** is set to `'element'`
 
 ---
 ## License
