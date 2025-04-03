@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-__version__ = '1.0.4'
+__version__ = '1.1.0'
 
 def _snake_case_to_camel_case(data: str) -> str:
     words = data.split('_')
@@ -31,7 +31,8 @@ def build_hyperscript(
     camelize: bool = True,
     scope: str = 'global',
     debug: bool = False,
-    event: str | None = 'init'
+    event: str | None = 'init',
+    as_property: bool = False
 ) -> str:
     """
     Generate a Hyperscript block from Python data.
@@ -42,9 +43,10 @@ def build_hyperscript(
         preserve: If False, the element will remove itself after execution.
         flatten: If True, each key in a dict becomes a separate variable.
         camelize: If True, converts snake_case keys to camelCase.
-        scope: Hyperscript scope (e.g., "global", "local", "element").
+        scope: Hyperscript scope (e.g., "global", "local", "element") (ignored if as_property=True).
         debug: If True, adds console logging.
         event: The triggering event (or "init").
+        as_property: Attaches data to the element as a property rather than a hyperscript variable.
 
     Returns:
         A string of valid Hyperscript code.
@@ -61,7 +63,7 @@ def build_hyperscript(
         assignments = []
         for key, value in data.items():
             value = _prepare_for_hyperscript(value)
-            assignment = f'set {scope} {key} to {value}'
+            assignment = f'set {scope} {key} to {value}' if not as_property else f'set my {key} to {value}'
             if debug:
                 logging_statement = f'call console.log(`{key}:\\n`, {key})'
                 assignment = f'{assignment} then {logging_statement}'
@@ -70,7 +72,7 @@ def build_hyperscript(
         
     else:
         data = _prepare_for_hyperscript(data)
-        assignment = f'set {scope} {name} to {data}'
+        assignment = f'set {scope} {name} to {data}' if not as_property else f'set my {name} to {data}'
         if debug:
             logging_statement = f'call console.log(`{name}:\\n`, {name})'
             assignment = f'{assignment} then {logging_statement}'
@@ -83,7 +85,7 @@ def build_hyperscript(
     hyperscript = f'{event}\n    {assignment}'
 
     if not preserve:
-        hyperscript = f'{hyperscript} then remove me'  
+        hyperscript = f'{hyperscript}\n    then remove me'  
 
     hyperscript = f'{hyperscript}\nend'
     return hyperscript

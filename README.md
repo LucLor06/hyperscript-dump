@@ -43,6 +43,13 @@ end
 
 Keeps the element the hyperscript is on in the DOM after initializing if `True`.
 
+### `as_property`
+*Type*: `bool` | *Default*: `False`
+
+Sets the data as a property on the element rather than a hyperscript variable. Useful when needing to access data on a different element that isn't an attribute.
+
+**Note:** The `scope` kwarg is ignored when this is `True`.
+
 ### `camelize`
 *Type*: `bool` | *Default*: `True`
 
